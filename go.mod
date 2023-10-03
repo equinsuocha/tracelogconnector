@@ -1,4 +1,4 @@
-module github.com/gord02/exampleconnector
+module github.com/equinsuocha/tracelogconnector
 
 go 1.20
 
