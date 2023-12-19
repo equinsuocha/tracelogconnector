@@ -29,6 +29,11 @@ type HasAttributes interface {
 func newConnector(logger *zap.Logger, config component.Config) (*connectorImp, error) {
 	logger.Info("Building tracelogconnector connector")
 	cfg := config.(*Config)
+
+	if err := cfg.Validate(); err != nil {
+		return nil, err
+	}
+
 	pConfig := cfg.GetProcessedConfig()
 
 	return &connectorImp{
@@ -71,7 +76,7 @@ func (c *connectorImp) ConsumeTraces(ctx context.Context, td ptrace.Traces) erro
 				log := logSlice.AppendEmpty()
 				if c.pConfig.HasAttrReMatch {
 					span.Attributes().CopyTo(log.Attributes())
-					c.GetResourceReMatch(log.Attributes())
+					c.GetAttrReMatch(log.Attributes())
 				}
 				c.copySpanAttrs(&log, &span)
 			}

@@ -1,0 +1,15 @@
+resource:
+  - source: env
+  - source: k8s.pod.name
+  - source: region
+  - source: service.name
+attributes:
+  - source: http.host
+  - source: http.method
+  - source: http.route
+  - source: http.status_code
+  - source: http.target
+  - source: http.user_agent
+  - source: ^custom_attr\.
+    match: regexp
+  - source: span.kind

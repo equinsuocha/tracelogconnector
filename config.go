@@ -82,8 +82,8 @@ func (c *Config) Validate() error {
 func (c *Config) Normalize() error {
 	for i := 0; i < len(c.Attributes); i++ {
 		a := &c.Attributes[i]
-		a.normalizeDest()
 		a.normalizeMatch()
+		a.normalizeDest()
 		if err := a.compileRe(); err != nil {
 			return err
 		}
@@ -91,8 +91,8 @@ func (c *Config) Normalize() error {
 
 	for i := 0; i < len(c.Resource); i++ {
 		a := &c.Resource[i]
-		a.normalizeDest()
 		a.normalizeMatch()
+		a.normalizeDest()
 		if err := a.compileRe(); err != nil {
 			return err
 		}
@@ -102,7 +102,7 @@ func (c *Config) Normalize() error {
 }
 
 func (c *AttrConfig) normalizeDest() {
-	if len(c.Dest) == 0 {
+	if c.Match == "strict" && len(c.Dest) == 0 {
 		c.Dest = c.Source
 	}
 }

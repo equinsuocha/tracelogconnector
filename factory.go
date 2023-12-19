@@ -14,7 +14,8 @@ func NewFactory() connector.Factory {
 	return connector.NewFactory(
 		typeStr,
 		createDefaultConfig,
-		connector.WithTracesToLogs(createTracesToLogsConnector, component.StabilityLevelAlpha))
+		connector.WithTracesToLogs(createTracesToLogsConnector, component.StabilityLevelAlpha),
+	)
 }
 
 const (
